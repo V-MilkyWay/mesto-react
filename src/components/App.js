@@ -1,4 +1,6 @@
-import logo from '../images/logo.svg'; 
+import Header from './Header.js';
+import Main from './Main.js';
+import Footer from './Footer.js';
 
 function App() {
   return (
@@ -70,28 +72,9 @@ function App() {
                 </form>
             </div>
         </div>
-        <header class="header">
-            <img src={logo} alt="Карачаевск" class="header__logo" />
-        </header>
-        <main class="main">
-            <section class="profile">
-                <div class="profile-avatar">
-                    <img id="avatar" class="profile-avatar__image" src="<%=require('./images/avatar.png')%>" alt='Аватарка' />
-                    <button type="button" class="profile-avatar__redact-button"></button>
-                </div>
-                <div class="profile-info">
-                    <h1 id="name" class="profile-info__name">Жак-Ив Кусто</h1>
-                    <p id="about" class="profile-info__job">Исследователь океана</p>
-                    <button type="button" class="profile-info__edit-button"></button>
-                </div>
-                <button type="button" class="profile__add-button"></button>
-            </section>
-            <section class="elements">
-            </section>
-        </main>
-        <footer class="footer">
-            <p class="footer__copyright">&copy; 2021 Mesto Russia</p>
-        </footer>
+        <Header />
+        <Main />
+        <Footer />
     </div>
     <template id="card-template">
         <div class="element">
