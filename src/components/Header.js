@@ -3,8 +3,8 @@ import logo from '../images/logo.svg';
 
 function Header() {
   return (
-    <header class="header">
-        <img src={logo} alt="Карачаевск" class="header__logo" />
+    <header className="header">
+        <img src={logo} alt="Карачаевск" className="header__logo" />
     </header>
   );
 }
