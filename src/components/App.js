@@ -13,15 +13,15 @@ function App() {
     const [isEditAgreePopupOpen, setEditAgreePopupOpen] = React.useState(false);
     
     function handleEditAvatarClick() {
-        setEditProfilePopupOpen(true);
+        setEditAvatarPopupOpen(true);
     }
     
     function handleEditProfileClick() {
-        setAddPlacePopupOpen(true); 
+        setEditProfilePopupOpen(true); 
     }
    
     function handleAddPlaceClick() {
-        setEditAvatarPopupOpen(true);
+        setAddPlacePopupOpen(true);
     }
 
     function closeAllPopups() {
