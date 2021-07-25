@@ -1,12 +1,12 @@
 import React from 'react';
 
-function ImagePopup() {
+function ImagePopup(props) {
   return (
-    <div className="popup popup_type_image">
+    <div className={`popup popup_type_image ${props.card.bool? ('popup_opened') : ''}`}>
         <div className="popup__container">
-            <button type="button" className="popup__close-button"></button>
+        <button onClick={props.onClose} type="button" className="popup__close-button"></button>
             <div className="form-image">
-                <img className="form-image__image" src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg" alt="Изображение" />
+                <img className="form-image__image" src={props.card.link} alt="Изображение" />
                 <p className="form-image__text">Картинка</p>
             </div>
         </div>

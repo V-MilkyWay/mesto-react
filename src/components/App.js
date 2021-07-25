@@ -11,7 +11,14 @@ function App() {
     const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false);  
     const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
     const [isEditAgreePopupOpen, setEditAgreePopupOpen] = React.useState(false);
+    const [selectedCard, setselectedCard] = React.useState({ bool: false, link: '' });
     
+    function handleCardClick(props) {
+        setselectedCard({
+            bool: true,
+            link: props,
+          });
+    }
     function handleEditAvatarClick() {
         setEditAvatarPopupOpen(true);
     }
@@ -29,6 +36,7 @@ function App() {
         setAddPlacePopupOpen(false);
         setEditAvatarPopupOpen(false);
         setEditAgreePopupOpen(false);
+        setselectedCard(false);
     }
 
   return (
@@ -56,7 +64,7 @@ function App() {
             <input id="url-input" name="link" type="url" className="form__input form__input_type_link" placeholder="Ссылка на картинку" required />
             <span className="form__input-error url-input-error"></span>
         </>} />
-        <ImagePopup />
+        <ImagePopup card={selectedCard} onClose={closeAllPopups}/>
         <PopupWithForm type="deletion" isOpen = {isEditAgreePopupOpen ? 'popup_opened' : ''} name="formAgree" title ="Вы уверены?" text ="Да" />
         <PopupWithForm type="redact-avatar" isOpen = {isEditAvatarPopupOpen ? 'popup_opened' : ''} onClose = {closeAllPopups}  name="redactAvatar" title ="Обновить аватар" text ="Сохранить" children={
         <>
@@ -67,7 +75,8 @@ function App() {
         <Main 
             onEditAvatar = {handleEditAvatarClick}
             onAddPlace = {handleAddPlaceClick} 
-            onEditProfile = {handleEditProfileClick} 
+            onEditProfile = {handleEditProfileClick}
+            onCardClick = {handleCardClick} 
         />
         <Footer />
     </div>
