@@ -4,9 +4,9 @@ import Card from './Card.js';
 
 function Main(props) {
 
-  const [userName, setUserName] = React.useState();
-  const [userDescription, setDescription] = React.useState();
-  const [userAvatar, setUserAvatar] = React.useState();
+  const [userName, setUserName] = React.useState('');
+  const [userDescription, setDescription] = React.useState('');
+  const [userAvatar, setUserAvatar] = React.useState('');
   const [cards, setCards] = React.useState([]);
 
     React.useEffect(() => {
@@ -34,7 +34,7 @@ function Main(props) {
       function initialCards() {
         api.initCardsFromServer()
         .then((result) => {
-          setCards([...cards, result.reverse()][0])
+          setCards([...result.reverse()])
           })
         .catch((err) => {
            console.log(err)
