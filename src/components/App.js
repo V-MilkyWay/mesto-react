@@ -43,21 +43,13 @@ function App() {
     }
 
   return (
-<html lang="ru">
-
-<head>
-    <meta charSet="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <title>Mesto</title>
-</head>
-
-<body>
+      <>
     <div className="page">
         <PopupWithForm type="redact" isOpen = {isEditProfilePopupOpen ? 'popup_opened' : ''} onClose = {closeAllPopups} name="profile" title ="Редактировать профиль" text ="Сохранить" children={
         <>
-            <input id="name-input" name="name" type="text" className="form__input form__input_type_name" placeholder="Имя" value="Имя" required minLength="2" maxLength="40" />
+            <input id="name-input" name="name" type="text" className="form__input form__input_type_name" placeholder="Имя" defaultValue="Имя" required minLength="2" maxLength="40" />
             <span className="form__input-error name-input-error"></span>
-            <input id="job-input" name="about" type="text" className="form__input form__input_type_job" placeholder="Род деятельности" value="Род деятельности" required minLength="2" maxLength="200" />
+            <input id="job-input" name="about" type="text" className="form__input form__input_type_job" placeholder="Род деятельности" defaultValue="Род деятельности" required minLength="2" maxLength="200" />
             <span className="form__input-error job-input-error"></span>
         </>} />
         <PopupWithForm type="add-card" isOpen = {isAddPlacePopupOpen ? 'popup_opened' : ''} onClose = {closeAllPopups}  name="addCard" title ="Новое место" text ="Сохранить" children={
@@ -83,8 +75,7 @@ function App() {
         />
         <Footer />
     </div>
-</body>
-</html>
+    </>
   );
 }
 
