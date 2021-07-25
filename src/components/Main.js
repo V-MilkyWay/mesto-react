@@ -1,5 +1,6 @@
 import React from 'react';
-import {api} from '../utils/Api.js'
+import {api} from '../utils/Api.js';
+import Card from './Card.js';
 
 function Main(props) {
 
@@ -26,19 +27,21 @@ function Main(props) {
                console.log(err)
             })
       }
+      initialUser();
+    }, []);
+
+      React.useEffect(() => {
       function initialCards() {
         api.initCardsFromServer()
         .then((result) => {
-          setCards([...cards, result])
+          setCards([...cards, result.reverse()][0])
           })
         .catch((err) => {
            console.log(err)
         })
       }
-
-      initialUser();
       initialCards();
-    }, []);
+    },[]);
     
 
   return (
@@ -56,18 +59,8 @@ function Main(props) {
             <button onClick={props.onAddPlace} type="button" className="profile__add-button"></button>
         </section>
         <section className="elements">
-        {cards[0].map((card, i) => (
-          
-          <div key={i} className="element">
-              <button type="button" className="element__button-trash"></button>
-              <img src={card.link} alt="Описание изображения" alt={card.name} className="element__image" />
-              <p className="element__text">{card.name}</p>
-              <div className="element-like">
-                  <button type="button" className="element-like__like"></button>
-                  <p id="number" className="element-like__number"></p>
-              </div>
-          </div>
-        
+        {cards.map((card, i) => ( 
+          <Card key={i} card ={card} /> 
         ))}
         </section>
     </main>

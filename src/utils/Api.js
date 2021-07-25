@@ -26,7 +26,7 @@ class Api {
                         authorization: this._authorization
                     }
                 })
-                .then(res => this._getResponseData(res));
+                .then(res => this._getResponseData(res))
         }
         //loading info about user on server
     loadingUserInfoOnServer({ name, about }) {
