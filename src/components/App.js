@@ -71,17 +71,6 @@ function App() {
         />
         <Footer />
     </div>
-    <template id="card-template">
-        <div className="element">
-            <button type="button" className="element__button-trash"></button>
-            <img src="<%=require('./images/kirill-pershin-1088404-unsplash.jpg')%>" alt="Описание изображения" className="element__image" />
-            <p className="element__text">Описание изображения</p>
-            <div className="element-like">
-                <button type="button" className="element-like__like"></button>
-                <p id="number" className="element-like__number">0</p>
-            </div>
-        </div>
-      </template>
 </body>
 </html>
   );

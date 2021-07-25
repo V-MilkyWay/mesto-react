@@ -6,28 +6,39 @@ function Main(props) {
   const [userName, setUserName] = React.useState();
   const [userDescription, setDescription] = React.useState();
   const [userAvatar, setUserAvatar] = React.useState();
-  
+  const [cards, setCards] = React.useState([]);
+
     React.useEffect(() => {
       function initialUser() {
-        Promise.all([api.initialUsers()])
+        api.initialUsers()
             .then((result) => {
-              console.log(result)
               setUserName(
-                result[0].name
+                result.name
               );
               setDescription(
-                result[0].about
+                result.about
               );
               setUserAvatar(
-                result[0].avatar
+                result.avatar
               );
             })
             .catch((err) => {
                console.log(err)
             })
       }
+      function initialCards() {
+        api.initCardsFromServer()
+        .then((result) => {
+          setCards([...cards, result])
+          })
+        .catch((err) => {
+           console.log(err)
+        })
+      }
+
       initialUser();
-    });
+      initialCards();
+    }, []);
     
 
   return (
@@ -45,9 +56,39 @@ function Main(props) {
             <button onClick={props.onAddPlace} type="button" className="profile__add-button"></button>
         </section>
         <section className="elements">
+        {cards[0].map((card, i) => (
+          
+          <div key={i} className="element">
+              <button type="button" className="element__button-trash"></button>
+              <img src={card.link} alt="Описание изображения" alt={card.name} className="element__image" />
+              <p className="element__text">{card.name}</p>
+              <div className="element-like">
+                  <button type="button" className="element-like__like"></button>
+                  <p id="number" className="element-like__number"></p>
+              </div>
+          </div>
+        
+        ))}
         </section>
     </main>
   );
 }
 
 export default Main;
+
+
+/*
+{cards.map((card, i) => (
+          <>
+          <div key={i} className="element">
+              <button type="button" className="element__button-trash"></button>
+              <img src={card.link} alt="Описание изображения" alt={card.name} className="element__image" />
+              <p className="element__text">{card.name}</p>
+              <div className="element-like">
+                  <button type="button" className="element-like__like"></button>
+                  <p id="number" className="element-like__number"></p>
+              </div>
+          </div>
+        </>
+        ))}
+        */
