@@ -11,10 +11,10 @@ function App() {
     const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false);  
     const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
     const [isEditAgreePopupOpen, setEditAgreePopupOpen] = React.useState(false);
-    const [selectedCard, setselectedCard] = React.useState({ bool: false, link: '' });
+    const [selectedCard, setSelectedCard] = React.useState({ bool: false, link: '' });
     
     function handleCardClick(props) {
-        setselectedCard({
+        setSelectedCard({
             bool: true,
             link: props,
           });
@@ -36,7 +36,10 @@ function App() {
         setAddPlacePopupOpen(false);
         setEditAvatarPopupOpen(false);
         setEditAgreePopupOpen(false);
-        setselectedCard(false);
+        setSelectedCard({
+            bool: false,
+            link: '',
+          });
     }
 
   return (
