@@ -10,6 +10,7 @@ function App() {
     const [isEditProfilePopupOpen, setEditProfilePopupOpen] = React.useState(false);   
     const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false);  
     const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
+    const [isEditAgreePopupOpen, setEditAgreePopupOpen] = React.useState(false);
     
     function handleEditAvatarClick() {
         setEditProfilePopupOpen(true);
@@ -23,6 +24,13 @@ function App() {
         setEditAvatarPopupOpen(true);
     }
 
+    function closeAllPopups() {
+        setEditProfilePopupOpen(false);
+        setAddPlacePopupOpen(false);
+        setEditAvatarPopupOpen(false);
+        setEditAgreePopupOpen(false);
+    }
+
   return (
 <html lang="ru">
 
@@ -34,14 +42,14 @@ function App() {
 
 <body>
     <div className="page">
-        <PopupWithForm type="redact" isOpen = {isEditProfilePopupOpen ? 'popup_opened' : ''} name="profile" title ="Редактировать профиль" text ="Сохранить" children={
+        <PopupWithForm type="redact" isOpen = {isEditProfilePopupOpen ? 'popup_opened' : ''} onClose = {closeAllPopups} name="profile" title ="Редактировать профиль" text ="Сохранить" children={
         <>
             <input id="name-input" name="name" type="text" className="form__input form__input_type_name" placeholder="Имя" value="Имя" required minLength="2" maxLength="40" />
             <span className="form__input-error name-input-error"></span>
             <input id="job-input" name="about" type="text" className="form__input form__input_type_job" placeholder="Род деятельности" value="Род деятельности" required minLength="2" maxLength="200" />
             <span className="form__input-error job-input-error"></span>
         </>} />
-        <PopupWithForm type="add-card" isOpen = {isAddPlacePopupOpen ? 'popup_opened' : ''}  name="addCard" title ="Новое место" text ="Сохранить" children={
+        <PopupWithForm type="add-card" isOpen = {isAddPlacePopupOpen ? 'popup_opened' : ''} onClose = {closeAllPopups}  name="addCard" title ="Новое место" text ="Сохранить" children={
         <>
             <input id="title-input" name="title" type="text" className="form__input form__input_type_title" placeholder="Название" required minLength="2" maxLength="30" />
             <span className="form__input-error title-input-error"></span>
@@ -49,8 +57,8 @@ function App() {
             <span className="form__input-error url-input-error"></span>
         </>} />
         <ImagePopup />
-        <PopupWithForm type="deletion" name="formAgree" title ="Вы уверены?" text ="Да" />
-        <PopupWithForm type="redact-avatar" isOpen = {isEditAvatarPopupOpen ? 'popup_opened' : ''}  name="redactAvatar" title ="Обновить аватар" text ="Сохранить" children={
+        <PopupWithForm type="deletion" isOpen = {isEditAgreePopupOpen ? 'popup_opened' : ''} name="formAgree" title ="Вы уверены?" text ="Да" />
+        <PopupWithForm type="redact-avatar" isOpen = {isEditAvatarPopupOpen ? 'popup_opened' : ''} onClose = {closeAllPopups}  name="redactAvatar" title ="Обновить аватар" text ="Сохранить" children={
         <>
            <input id="link-input" name="avatar" type="url" className="form__input form__input_type_avatar" placeholder="Ссылка на картинку" required />
             <span className="form__input-error link-input-error"></span>
