@@ -5,11 +5,12 @@ import Footer from './Footer.js';
 import { api } from '../utils/Api.js';
 import ImagePopup from './ImagePopup.js';
 import PopupWithForm from './PopupWithForm.js';
+import EditProfilePopup from './EditProfilePopup.js'
 import { CurrentUserContext } from '../context/CurrentUserContext.js';
 
 function App() {
 
-    const [currentUser, setcurrentUser] = React.useState({});
+    const [currentUser, setCurrentUser] = React.useState({});
     const [isEditProfilePopupOpen, setEditProfilePopupOpen] = React.useState(false);
     const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false);
     const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
@@ -20,7 +21,7 @@ function App() {
         function getUserInfo() {
             api.initialUsers()
                 .then((result) => {
-                    setcurrentUser(
+                    setCurrentUser(
                         result
                     );
                 })
@@ -60,17 +61,20 @@ function App() {
         });
     }
 
+    function handleUpdateUser(data) {
+        api.loadingUserInfoOnServer({ name: data.name, about: data.about }).then((result) => {
+            setCurrentUser(
+                result
+            );
+            closeAllPopups();
+        })
+    }
+
     return (
         <>
             <CurrentUserContext.Provider value={currentUser}>
                 <div className="page">
-                    <PopupWithForm type="redact" isOpen={isEditProfilePopupOpen ? 'popup_opened' : ''} onClose={closeAllPopups} name="profile" title="Редактировать профиль" text="Сохранить" children={
-                        <>
-                            <input id="name-input" name="name" type="text" className="form__input form__input_type_name" placeholder="Имя" defaultValue="Имя" required minLength="2" maxLength="40" />
-                            <span className="form__input-error name-input-error"></span>
-                            <input id="job-input" name="about" type="text" className="form__input form__input_type_job" placeholder="Род деятельности" defaultValue="Род деятельности" required minLength="2" maxLength="200" />
-                            <span className="form__input-error job-input-error"></span>
-                        </>} />
+                    <EditProfilePopup onUpdateUser={handleUpdateUser} isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} />
                     <PopupWithForm type="add-card" isOpen={isAddPlacePopupOpen ? 'popup_opened' : ''} onClose={closeAllPopups} name="addCard" title="Новое место" text="Сохранить" children={
                         <>
                             <input id="title-input" name="title" type="text" className="form__input form__input_type_title" placeholder="Название" required minLength="2" maxLength="30" />
