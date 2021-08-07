@@ -87,27 +87,6 @@ class Api {
                 .then(res => this._getResponseData(res))
         }
     }
-    /*
-    likeCards(likeId, isLiked) {
-        return fetch(`${this._baseUrl}/cards/likes/${likeId}`, {
-                method: 'PUT',
-                headers: {
-                    authorization: this._authorization
-                }
-            })
-            .then(res => this._getResponseData(res))
-    }
-    //dislike cards
-    dislikeCards(likeId) {
-        return fetch(`${this._baseUrl}/cards/likes/${likeId}`, {
-                method: 'DELETE',
-                headers: {
-                    authorization: this._authorization
-                }
-            })
-            .then(res => this._getResponseData(res))
-    }
-    */
     //loading new avatar on server
     loadingNewAvatarOnServer({ avatar }) {
         return fetch(`${this._baseUrl}/users/me/avatar`, {

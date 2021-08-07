@@ -4,7 +4,7 @@ import Card from './Card.js';
 import { CurrentUserContext } from '../context/CurrentUserContext.js';
 
 function Main(props) {
-  
+
   const currentUser = React.useContext(CurrentUserContext);
 
   const [cards, setCards] = React.useState([]);
@@ -32,9 +32,13 @@ function Main(props) {
       setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
     });
   }
-function handleCardDelete() {
-
+function handleCardDelete(card) {
+api.deleteCardFromServer(card._id).then(() => {
+  setCards((state) => state.filter((c) => c._id != card._id));
+});
 }
+
+
 
   return (
     <main className="main">
@@ -52,8 +56,8 @@ function handleCardDelete() {
       </section>
       <section className="elements">
         {cards.map((card) => (
-          <Card key={card._id} card={card} onCardClick={props.onCardClick} onCardLike={handleCardLike} />
-        ))}
+          <Card key={card._id} card={card} onCardClick={props.onCardClick} onCardLike={handleCardLike} onCardDelete={handleCardDelete} />
+        )).reverse()}
       </section>
     </main>
   );
