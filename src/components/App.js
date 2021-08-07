@@ -5,7 +5,8 @@ import Footer from './Footer.js';
 import { api } from '../utils/Api.js';
 import ImagePopup from './ImagePopup.js';
 import PopupWithForm from './PopupWithForm.js';
-import EditProfilePopup from './EditProfilePopup.js'
+import EditAvatarPopup from './EditAvatarPopup.js';
+import EditProfilePopup from './EditProfilePopup.js';
 import { CurrentUserContext } from '../context/CurrentUserContext.js';
 
 function App() {
@@ -70,6 +71,15 @@ function App() {
         })
     }
 
+    function handleUpdateAvatar(data){
+        api.loadingNewAvatarOnServer(data).then((result) => {
+            setCurrentUser(
+                result
+            );
+            closeAllPopups();
+        })
+    }
+
     return (
         <>
             <CurrentUserContext.Provider value={currentUser}>
@@ -84,11 +94,7 @@ function App() {
                         </>} />
                     <ImagePopup card={selectedCard} onClose={closeAllPopups} />
                     <PopupWithForm type="deletion" isOpen={isEditAgreePopupOpen ? 'popup_opened' : ''} name="formAgree" title="Вы уверены?" text="Да" />
-                    <PopupWithForm type="redact-avatar" isOpen={isEditAvatarPopupOpen ? 'popup_opened' : ''} onClose={closeAllPopups} name="redactAvatar" title="Обновить аватар" text="Сохранить" children={
-                        <>
-                            <input id="link-input" name="avatar" type="url" className="form__input form__input_type_avatar" placeholder="Ссылка на картинку" required />
-                            <span className="form__input-error link-input-error"></span>
-                        </>} />
+                    <EditAvatarPopup onUpdateAvatar={handleUpdateAvatar} isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} />
                     <Header />
                     <Main
                         onEditAvatar={handleEditAvatarClick}
