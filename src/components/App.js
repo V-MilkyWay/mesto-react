@@ -78,25 +78,22 @@ function App() {
 
     function handleUpdateUser(data) {
         api.loadingUserInfoOnServer({ name: data.name, about: data.about }).then((result) => {
-            setCurrentUser(
-                result
-            ).catch((err)=>{
-                console.log(err);
-            }); 
+            setCurrentUser(result);
             closeAllPopups();
+        }).catch((err) => {
+            console.log(err);
         })
     }
 
     function handleUpdateAvatar(data) {
         api.loadingNewAvatarOnServer(data).then((result) => {
-            setCurrentUser(
-                result
-            ).catch((err)=>{
-                console.log(err);
-            }); 
+            setCurrentUser(result);
             closeAllPopups();
+        }).catch((err) => {
+            console.log(err);
         })
     }
+
 
     function handleCardLike(card) {
         // Снова проверяем, есть ли уже лайк на этой карточке
@@ -105,7 +102,7 @@ function App() {
         // Отправляем запрос в API и получаем обновлённые данные карточки
         api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
             setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
-        }).catch((err)=>{
+        }).catch((err) => {
             console.log(err);
         });
     }
@@ -113,9 +110,9 @@ function App() {
     function handleCardDelete(card) {
         api.deleteCardFromServer(card._id).then(() => {
             setCards((state) => state.filter((c) => c._id != card._id));
-        }).catch((err)=>{
+        }).catch((err) => {
             console.log(err);
-        }); 
+        });
     }
 
 
@@ -123,9 +120,9 @@ function App() {
         api.loadingNewCardOnServer(data).then((newCard) => {
             setCards([...cards, newCard]);
             closeAllPopups();
-        }).catch((err)=>{
+        }).catch((err) => {
             console.log(err);
-        }); 
+        });
     }
 
     return (
